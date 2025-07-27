@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <Forms>
+    <MW_Lua_clutch Class="TCEForm" Encoding="Ascii85">#g+M_,AtKyvy_XKpshC8#}l{3Bc$yGNGNJ07+(JHWn}fr7QsfgGe*0q?39w_6O#nOm[{K),^E[rv5*]1/Kv(Erj71/Z7[0fdXz1zgYi;8gil?(3U6NMqp7(}p%rftp3S4y#fYxt(lqE0%w=n6?dW.c97,VE0VunIuIx_/N^mi]X9Soqu(L{XEt?hQu^*0vZdE4O-Ee]H14Ke=YjVXVK*^@vE]_Y{0SB%Grlk1kYtJ2w8!DuRr=zS:rDw$nFd]z2(Qkp)IK!a/Wrb$5snunKTrh{/.H=2BsY?,qNPI85G?Jy.4yRMZkY6hI/i4$VK;*m9JjViE-a^t0vvC(;sE@E:;hF7,Rd-I.cVq/l!iEf)Ty%mp-0+VW:_3XIqa%XPtuL+1tF4tJ2c:+2/}#C2fmH8)hj==!T/oKWNh:ZD7[JFo@}?@y/cuFO/3n]loVk]aM:el-oGES{GrJl^^jc3sfQ3NpmNNW2z/(K.YHqDKpY$Z1bU)?[JxeB[^JCYog_rmmBAO52A]Z-i3$::tW)L?5@n1FxZ.s$)7@Rl3fgzE{.Vpo^kqB4Xj=$JZAQNZkypQVb^-m4*M];IoYRa4tQp{fgIf)TH7]{p]]zNz7VihyR-:vCP@Gx4)WLNy1ig8T*yfW]^@K$2UO-ScnnUm1=^_ZeZ)l^,vzA9E3DLo}1#ZwqtP=iLh$e-u%:eu(0k_U#dt(+kIK3o5y6EZFfz3H+X[_W?6w)nq4x#T}6;zq)Zxcpl{l=TM{Gg7lbHohnOL76=^EjX6.O1J-*[G/rJMbdWDK6:hysIvTi0R</MW_Lua_clutch>
+  </Forms>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"In race status (In = 1, out = 0)"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"speed.exe"+520E68</Address>
+      <Offsets>
+        <Offset>26C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Out countdown status (out = 1, on = 0)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"speed.exe"+534CF4</Address>
+      <Offsets>
+        <Offset>16C</Offset>
+        <Offset>44</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Gear variable (in game shown less by 1)"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"speed.exe"+50D670</Address>
+      <Offsets>
+        <Offset>84</Offset>
+        <Offset>10</Offset>
+        <Offset>8</Offset>
+        <Offset>4</Offset>
+        <Offset>68</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Max gear constant (grater by 2 than shown in game)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"speed.exe"+52FE60</Address>
+      <Offsets>
+        <Offset>2</Offset>
+        <Offset>E8</Offset>
+        <Offset>1C</Offset>
+        <Offset>8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Zero shifting delay"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+
+mov [ecx],00000001
+jmp exit
+
+originalcode:
+mov [ecx],00000001
+
+exit:
+jmp returnhere
+
+"speed.exe"+2919DC:
+jmp newmem
+nop
+returnhere:
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+
+---------------------------------------------------------------------
+
+<LuaScript>
+
+MW_Lua_clutch.show()
+
+getLuaEngine().cbShowOnPrint.Checked = false
+getLuaEngine().show()
+
+---------------------------------------------------------------------
+
+--Decrement function.
+
+function fDecrement(Input)
+
+	return Input - 1
+
+end
+
+---------------------------------------------------------------------
+
+--Increment function.
+
+function fIncrement(Input)
+
+	return Input + 1
+
+end
+
+---------------------------------------------------------------------
+
+print("\n".."It's an automatic script, just make sure that your NFS Most Wanted application named \"SPEED.EXE\"".."\n")
+
+---------------------------------------------------------------------
+
+--Custom block
+
+---------------------------------------------------------------------
+
+--Change "VK_" names (VK for Virtual Keys just find in the internet a list of keys) to your keys you want to use.
+
+local ShiftUpKey = VK_NUMPAD2
+local ShiftDownKey = VK_NUMPAD1
+local ClutchKey = VK_DECIMAL
+
+--[[
+Here you can increase or decrease the interval for the script 
+to repeat itself (in ms), making it more accurate or less demanding 
+on performance, respectively.
+--]]
+
+--[[
+It is not recommended to set it to less than 15 ms, since
+the frame preparation time at 60 Hz is (1 s or 1000 ms).
+For 60 frames, it is approximately (50/3 ms or 16.6666... ms), 
+so you will not notice a difference after about 17 ms at 60 Hz.
+--]]
+
+local IntLvlLow = false
+local IntLvlLowVal = 200			--For menu just checks racing player or not (5 times in a sec or every 200 ms).
+local IntLvlMid = false
+local IntLvlMidVal = 25			--For countdown resets timer when player in countdown (40 times in a sec or every 25 ms).
+local IntLvlHigh = false
+local IntLvlHighVal = 10			--For racing mode (100 times in a sec or every 10 ms)
+
+---------------------------------------------------------------------
+
+local BaseAddress					--Contains game address.
+
+---------------------------------------------------------------------
+
+--Block containing pointers and offsets for each ID in the cheat entries section.
+
+---------------------------------------------------------------------
+
+--Non racing status variable ID0
+
+local PointerOffset_ID0 = {0x520E68,0x26C}
+local Size_ID0 = #PointerOffset_ID0
+local ResultAddress_ID0 = {}
+
+for i = 1, Size_ID0 do
+
+	ResultAddress_ID0[i] = nil
+
+end
+
+local NonRacingStatus				--Contains not in race variable 1 - out racing (menu or pause and etc), 0 - in racing mode.
+
+---------------------------------------------------------------------
+
+--Out countown variable ID1
+
+local PointerOffset_ID1 = {0x534CF4,0x44,0x16C}
+local Size_ID1 = #PointerOffset_ID1
+local ResultAddress_ID1 = {}
+
+for i = 1, Size_ID1 do
+
+	ResultAddress_ID1[i] = nil
+
+end
+
+local OutCountdownStatus				--Contains out countdown variable.
+
+---------------------------------------------------------------------
+
+--Gear variable ID2					[eax+0x1D4] also 0x33B5A8, 0x33B5B4, 0x33B5C0, 0x33B5D8, 0x33B5E4, 0x33B5F0, 0x33B5FC, 0x33B608, 0x33B614, 0x33B620.
+
+local PointerOffset_ID2 = {0x50D670,0x68,0x4,0x8,0x10,0x84}
+local Size_ID2 = #PointerOffset_ID2
+local ResultAddress_ID2 = {}
+
+for i = 1, Size_ID2 do
+
+	ResultAddress_ID2[i] = nil
+
+end
+
+local GameGearAddress				--Contains the address of the location in RAM where the gear value is stored.
+
+local GameGear						--Is used to check the current game gear value needed for the function rRSCheck().
+
+local ScriptGear					--Is used for up and down shifts, as well as rewriting the gear value in RAM itself.
+local ShownGear						--Is used for console output to display the actual gear, since the gear value in RAM is offset by 1 (for example, if the game shows gear 1, the value in RAM is 2).
+
+---------------------------------------------------------------------
+
+--Max gear variable ID3				[[[eax+0x26C]+0x20]+0x1C8]
+
+local PointerOffset_ID3 = {0x52FE60,0x8,0x1C,0xE8,2}
+local Size_ID3 = #PointerOffset_ID3
+local ResultAddress_ID3 = {}
+
+for i = 1, Size_ID3 do
+
+	ResultAddress_ID3[i] = nil
+
+end
+
+local GameMaxGearAddress			--Same as GameGearAddress but for maximum gear value for vehicle.
+
+local ScriptMaxGear					--Stores the maximum gear value in the game and is used to prevent shifting too high. It was created because there are vehicles with 5 or 6 speed transmissions. Since the gear value in RAM is offset by. 1 (for example, if the maximum gear is 7, it appears as 9 in RAM), it needs to be less than value in GameMaxGearAddress by 1.
+
+---------------------------------------------------------------------
+
+--Gets the game address.
+
+function addressFinder()
+
+	if OpenProcess("SPEED.EXE") then
+
+		print("Connected to Most Wanted process.")
+		BaseAddress = getAddress("SPEED.EXE")
+		return
+
+	else
+
+		print("Couldn\'t find NFS Most Wanted process open the game and press \"Execute\" button.")
+		BaseAddress = nil
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+--Asks for the game variable address, applying variable offsets.
+
+function gameValueAddressFinder(NumberOfNesting,Offset,ResultAddress)
+
+	ResultAddress[1] = (BaseAddress + Offset[1])
+
+	for i = 1, NumberOfNesting - 1 do
+
+		if readPointer(ResultAddress[i]) ~= nil then
+
+			ResultAddress[i+1] = (readPointer(ResultAddress[i]) + Offset[i+1])
+
+		else
+
+			return nil
+
+		end
+
+	end
+
+	return ResultAddress[NumberOfNesting]
+
+end
+
+---------------------------------------------------------------------
+
+--Defines out-race status variable.
+
+function fNonRacingStatus()
+
+	NonRacingStatus = readPointer(gameValueAddressFinder(Size_ID0,PointerOffset_ID0,ResultAddress_ID0))
+
+	--[[
+	print("\t".."Debug: non-racing status:".."\t\t"..NonRacingStatus)
+	--]]
+
+end
+
+---------------------------------------------------------------------
+
+--Defines out-countdown status variable.
+
+function fOutCountdownStatus()
+
+	OutCountdownStatus = readPointer(gameValueAddressFinder(Size_ID1,PointerOffset_ID1,ResultAddress_ID1))
+
+	if OutCountdownStatus == nil then
+
+		OutCountdownStatus = nil
+
+		--[[
+		print("\t".."Debug: out countdown status:".."\t\t".."NIL")
+		--]]
+
+		return
+
+	end
+
+	OutCountdownStatus = OutCountdownStatus%256
+
+	--[[
+	print("\t".."Debug: out countdown status:".."\t\t"..OutCountdownStatus)
+	--]]
+
+end
+
+---------------------------------------------------------------------
+
+--Defines GameGearAddress and GameGear variables.
+
+function fGameGear()
+
+	GameGearAddress = gameValueAddressFinder(Size_ID2,PointerOffset_ID2,ResultAddress_ID2)
+
+	if GameGearAddress == nil then
+
+		GameGear = nil
+
+		--[[
+		print("\t".."Debug: game gear value address:".."\t\t".."NIL")
+		print("\t".."Debug: game gear value:".."\t\t".."NIL")
+		--]]
+
+		return
+
+	end
+
+	GameGear = readPointer(GameGearAddress)
+
+	--[[
+	print("\t".."Debug: game gear value address:".."\t\t"..string.format("0x%X",GameGearAddress))
+	print("\t".."Debug: game gear value:".."\t\t"..GameGear)
+	--]]
+
+end
+
+---------------------------------------------------------------------
+
+--Defines ScriptMaxGear variable.
+
+function fScriptMaxGear()
+
+	GameMaxGearAddress = gameValueAddressFinder(Size_ID3,PointerOffset_ID3,ResultAddress_ID3)
+
+	if GameMaxGearAddress == nil or readPointer(GameMaxGearAddress) == nil then
+
+		ScriptMaxGear = nil
+
+		--[[
+		print("\t".."Debug: max game gear value address:".."\t\t".."NIL")
+		print("\t".."Debug: script max gear value:".."\t\t".."NIL")
+		--]]
+
+		return
+
+	end
+
+	ScriptMaxGear = fDecrement(readPointer(GameMaxGearAddress)%256)
+
+	--[[
+	print("\t".."Debug: max game gear value address:".."\t\t"..string.format("0x%X",GameMaxGearAddress))
+	print("\t".."Debug: script max gear value:".."\t\t"..ScriptMaxGear)
+	--]]
+
+end
+
+---------------------------------------------------------------------
+
+local SetupDone = false				--Used to check if the setup process is complete..
+
+---------------------------------------------------------------------
+
+--Initializes setup upon pressing the execute button.
+
+function setup(sender)
+
+	print("\n".."Setup started.")
+
+	addressFinder()
+
+	if BaseAddress == nil then
+
+		print("Error: Unable to find \"SPEED.EXE\" address.")
+		return
+
+	else
+
+		print("Address found.")
+		print("Script binds:".."\n")
+		print("   ".."NUMdel - clutch;")
+		print("   ".."NUM2 - gear up;")
+		print("   ".."NUM1 - gear down;")
+		print("\n".."To start or stop the script press \"Start\" or \"Stop\" respectively.".."\n")
+
+		SetupDone = true
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+local ClutchActive = false
+
+local HoldUp = false
+
+local HoldDown = false
+
+---------------------------------------------------------------------
+
+function scriptGearReset()  --Reassigns ScriptGear.
+
+	if --[[ScriptGear ~= GameGear and--]] not isKeyPressed(ClutchKey) and not ClutchActive then
+
+		ScriptGear = GameGear
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function rRSCheck()  --Ensures ScriptGear remains synchronized with GameGear after reverse, reset, or race start actions to avoid errors.
+
+	if GameGear == 0 or GameGear == 2 then
+
+		ScriptGear = 2
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function clutchOnLogic()  --Assigns value 1 (neutral) to the gear variable in game RAM.
+
+	if isKeyPressed(ClutchKey) and not ClutchActive then
+
+		ClutchActive = true
+
+		writeInteger(GameGearAddress, 1)
+
+		----[[
+		print("Clutch on, gear set to neutral.")
+		--]]
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function clutchOffLogic()  --Assigns script gear value to the gear variable in game RAM.
+
+	if not isKeyPressed(ClutchKey) and ClutchActive then
+
+		ShownGear = fDecrement(ScriptGear)
+
+		writeInteger(GameGearAddress, ScriptGear)
+
+		----[[
+		print("Clutch off, actual gear is: "..ShownGear..".")
+		--]]
+
+		ClutchActive = false
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function upShift() --Increments the ScriptGear value by 1 (gear up).
+
+	if ClutchActive and isKeyPressed(ShiftUpKey) and not HoldUp then
+
+		if ScriptGear &lt; ScriptMaxGear then
+
+			ScriptGear = fIncrement(ScriptGear)
+
+			ShownGear = fDecrement(ScriptGear)
+
+			----[[
+			print("Actual gear is: "..ShownGear..".")
+			--]]
+
+		end
+
+		HoldUp = true
+
+	end
+
+	if not isKeyPressed(ShiftUpKey) then
+
+		HoldUp = false
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function downShift()  --Decrements the ScriptGear value by 1 (gear down).
+
+	if ClutchActive and isKeyPressed(ShiftDownKey) and not HoldDown then
+
+		if ScriptGear &gt; 1 then
+
+			ScriptGear = fDecrement(ScriptGear)
+
+			ShownGear = fDecrement(ScriptGear)
+
+			----[[
+			print("Actual gear is: "..ShownGear..".")
+			--]]
+
+		end
+
+		HoldDown = true
+
+	end
+
+	if not isKeyPressed(ShiftDownKey) then
+
+		HoldDown = false
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function main()  --Main function, runs on timer interval.
+
+	---------------------------------------------------------------------
+
+	--[[
+	print("\n\n".."\t".."Debug: start.")
+	--]]
+
+	fNonRacingStatus()
+	fOutCountdownStatus()
+	fGameGear()
+	fScriptMaxGear()
+
+	--[[
+	print("\t".."Debug: end.".."\n\n")
+	--]]
+
+	---------------------------------------------------------------------
+
+	if NonRacingStatus == nil or NonRacingStatus ~= 1 then  --If player isn't racing, sets a low-frequency timer.
+
+		timerIntLowLvl()
+		return
+
+	end
+
+	---------------------------------------------------------------------
+
+	if OutCountdownStatus ~= nil and OutCountdownStatus == 0 then  --If player in countdown waiting far race to start, sets a mid-frequency timer.
+
+		timerIntMidLvl()
+		return
+
+	end
+
+	---------------------------------------------------------------------
+
+	timerIntHighLvl()
+
+	if GameGear == nil or ScriptMaxGear == nil then  --Prevents errors in console.
+
+		return
+
+	end
+
+	---------------------------------------------------------------------
+
+	if GameGear &gt; 0 and GameGear &lt;= ScriptMaxGear then  --The main part of the code that executes all the functions that change the values in the game and sets the timer to a high-frequency interval.
+
+		fGameGear()
+		scriptGearReset()
+		rRSCheck()
+
+		clutchOnLogic()
+		clutchOffLogic()
+
+		upShift()
+		downShift()
+
+		return
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+local TimerMain = createTimer(nil, false)  --Initializes a timer to trigger updates in the main function.
+TimerMain.Interval = IntLvlLowVal
+TimerMain.OnTimer = main
+
+---------------------------------------------------------------------
+
+function timerIntLowLvl()  --Sets timer for low-frequency updates.
+
+	if not IntLvlLow then
+
+		TimerMain.Interval = IntLvlLowVal
+		IntLvlLow = true
+		IntMidLow = false
+		IntLvlHigh = false
+
+		print("\n".."Timer level changed to low \"non-racing mode\"".."\n")
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function timerIntMidLvl()  --Sets timer for mid-frequency updates.
+
+	if not IntMidLow then
+
+		TimerMain.Interval = IntLvlMidVal
+		IntLvlLow = false
+		IntMidLow = true
+		IntLvlHigh = false
+
+		print("\n".."Timer level changed to mid \"countdown mode\"".."\n")
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function timerIntHighLvl()  --Sets timer for high-frequency updates.
+
+	if not IntLvlHigh then
+
+		TimerMain.Interval = IntLvlHighVal
+		IntLvlLow = false
+		IntMidLow = false
+		IntLvlHigh = true
+
+		print("\n".."Timer level changed to high \"racing mode\"".."\n")
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function startButtonClick(sender)  --Initiates the main function timer when the start button is clicked.
+
+	if SetupDone then
+
+		TimerMain.Enabled = true
+
+		print("Started")
+
+	else
+
+		print("Setup isn't done.")
+
+	end
+
+end
+
+---------------------------------------------------------------------
+
+function stopButtonClick(sender)  --Terminates the main function timer when the stop button is clicked.
+
+	TimerMain.Enabled = false
+
+	print("Stopped")
+
+end
+
+---------------------------------------------------------------------
+
+</LuaScript>
+</CheatTable>
