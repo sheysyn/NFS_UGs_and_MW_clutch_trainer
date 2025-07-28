@@ -44,7 +44,8 @@ in the text editor, it will still show default keys), click "Start" on the same 
 you can toggle it to remove delay between shifts or return it
 to how it was before. It's very noticeable in both parts of Undergound,
 but in Most Wanted I didn't notice much of a difference,
-so the feature is there, but it doesn't really make much sense.
+so the feature isn't there, because it doesn't really make much sense (game already uses
+zero shifting delay, yes in game it sound like it isn't but you still gain speed while engine producing no sound).
 
 >That's it — enjoy!
 
