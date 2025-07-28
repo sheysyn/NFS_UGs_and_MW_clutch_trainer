@@ -42,35 +42,21 @@
       <ID>4</ID>
       <Description>"Zero shifting delay"</Description>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
+      <AssemblerScript>
+
+[ENABLE]
 //code from here to '[DISABLE]' will be used to enable the cheat
 
-alloc(newmem,2048)
-label(returnhere)
-label(originalcode)
-label(exit)
-
-newmem: //this is allocated memory, you have read,write,execute access
-//place your code here
-
-mov [esi+44],00000003
-jmp exit
-
-originalcode:
-mov [esi+44],00000002
-
-exit:
-jmp returnhere
-
 "SPEED2.EXE"+1A161B:
-jmp newmem
-nop 2
-returnhere:
+mov [esi+44],00000003
 
 [DISABLE]
 //code from here till the end of the code will be used to disable the cheat
-dealloc(newmem)
-</AssemblerScript>
+
+"SPEED2.EXE"+1A161B:
+mov [esi+44],00000002
+
+      </AssemblerScript>
     </CheatEntry>
   </CheatEntries>
 
