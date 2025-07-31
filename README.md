@@ -1,34 +1,34 @@
-# Description.
+# Description
 
->It's Cheat Engine (ver.46 and newer) project with a Lua script inside.
+>It's a Cheat Engine (ver.46 and newer) project with a Lua script inside.
 
 >This project is based on source code published under the MIT license.
-Slightly modified, with the base idea and code taken from: https://github.com/clod44/NFSU2Clutch
+Slightly modified, based on the source code from: https://github.com/clod44/NFSU2Clutch
 
 >The differences in the code for various parts are only the values
 in the pointers and some comments in the console.
 
-# How to download?
+# How to download
 
->Download the repo (Green "Code" button. Download as zip).
+>Download the repo by clicking the green "Code" button and then selecting "Download ZIP".
 
 >Extract the files from the archive.
 
 # Changing bindings or entire code.
 
->Open the .CT (Cheat Engine) file with a text editor.
+>Open the .CT file (Cheat Engine) file with a text editor.
 
->Press Ctrl + F and enter "Custom block" in the search window, then press "Search".
+>Press Ctrl + F and enter "Custom block" in the search window, then press "Find".
 
->Read the comments and meke your decisions.
+>Read the comments and make your decisions.
 
 >If it causes lag, look a bit lower in the code and read following comments.
 
-# How to use?
+# How to use
 
 >Launch the game.
 
->Make sure that your in game gearbox type is manual or script won't work.
+>Make sure that your in-game gearbox type is manual or script won't work.
 
 >Open the .CT (Cheat Engine) file.
 
@@ -40,12 +40,12 @@ in the text editor, it will still show default keys), click "Start" on the same 
 
 >If it says "Started," try pressing your key bindings in-game.
 
->You also have "Zero shifting delay" in cheat engine window,
-you can toggle it to remove delay between shifts or return it
-to how it was before. It's very noticeable in both parts of Undergound,
+>You also have "Zero shifting delay" in Cheat Engine window,
+to remove delay between shifts or restore it to its original state.
+It's very noticeable in both parts of Undergound,
 but in Most Wanted I didn't notice much of a difference,
-so the feature isn't there, because it doesn't really make much sense (game already uses
-zero shifting delay, yes in game it sound like it isn't but you still gain speed while engine producing no sound).
+so the feature isn't there, because it doesn't really make much sense (the game already uses
+zero shifting delay; although it sounds like it isn't, you still gain speed while the engine produces no sound).
 
 >That's it — enjoy!
 
@@ -56,15 +56,15 @@ zero shifting delay, yes in game it sound like it isn't but you still gain speed
 >You can still use the game's default gear change buttons
 (which is easier during drag races), and they don't require holding the clutch.
 
-# What does it do?
+# What does it do
 
->Activating clutch shifts your gear to Neutral while you can still change gears in the background.
+>Activating clutch shifts your car's gear to Neutral while you can still change gears in the background.
 
 >Releasing the clutch shifts back to whatever gear you moved your shift to.
 
->It also remove delay between shifts.
+>It also removes delay between shifts.
 
-# Notes.
+# Notes
 
 >Try not to overlap your in-game keybinds with script keybinds.
 
